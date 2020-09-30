@@ -33,7 +33,7 @@ def fill_pixels(color):
 
 def lights_out():
     '''Fills all NeoPixels black.'''
-    cpx.pixels.fill(BLACK)
+    fill_pixels(BLACK)
 
 def blink_color(color, time=0.5):
     '''Flashes a given color, for a given number of seconds'''
@@ -47,6 +47,6 @@ while True:
     on = True
 
     if cpx.switch == on:
-        blink_color(CYAN, 1)
+        lights_out()
     else:
         fill_pixels(BLACK)
