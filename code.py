@@ -27,25 +27,26 @@ def change_pixel(index, color):
     '''Changes the RGB color of a given NeoPixel.'''
     cpx.pixel[index] = color
 
-def fill_all(color):
-    '''Fills all NeoPixel with given color'''
+def fill_pixels(color):
+    '''Fills all NeoPixel with given color.'''
     cpx.pixels.fill(color)
 
+def lights_out():
+    '''Fills all NeoPixels black.'''
+    cpx.pixels.fill(BLACK)
+
+def blink_color(color, time=0.5):
+    '''Flashes a given color, for a given number of seconds'''
+    fill_pixels(color)
+    sleep(time)
+    lights_out()
+    sleep(time)
+
 while True:
-    # start your code here
 
-   
-    # To control what happens when things are on and off
-    # You can use cpx.switch:
-
-
-    # To make it simulate blinking, we use sleep():
     on = True
 
     if cpx.switch == on:
-        fill_all(RED)
-        sleep(1)
-        fill_all(BLACK)
-        sleep(1)
+        blink_color(CYAN, 1)
     else:
-        cpx.pixels.fill(BLACK)
+        fill_pixels(BLACK)
