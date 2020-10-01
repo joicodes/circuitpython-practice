@@ -80,25 +80,59 @@ def blink_red_led(time=0.5):
 # Example: cpx.shake(shake_threshold=20)
 
 #TODO: https://learn.adafruit.com/circuitpython-made-easy-on-circuit-playground-express/light
-#🌞 A8 Light Detection - light sensor
-# Default Threshold:shake_threshold = 30
-# Lowest (more sensitive): shake_threshold = 10
-# Shake Helper Functions (Use cpx.shake())
+#🌞 A8 Light Detection - light sensor next to eye
+# Senses the amount of ambient light
+# returns the light level based on that data
+# Light Helper Functions (Use cpx.light)
 
-# Example: cpx.shake(shake_threshold=20)
+def scale_range(value):
+    """Scale a value from 0-320 (light range) to 0-9 (NeoPixel range).
+    Allows remapping light value to pixel position."""
+    return round(value / 320 * 9)
 
 
 
 # Initialize Settings:
-cpx.pixels.brightness = 0.1
+cpx.pixels.auto_write = False
+cpx.pixels.brightness = 0.3
 cpx.detect_taps = 1  # Pre-set for double tap detection
 on = True
 
-while True:
 
+ 
+while True:
     # D13 on when switch is on.
     cpx.red_led = cpx.switch
+    change_color(BLACK)
+    peak = cpx.light
+    if peak > 315:
+        change_color(GREEN)
 
-    if cpx.tapped:
-        current_color = choice(color_list)
-        change_color(current_color)
+    cpx.pixels.show()
+    sleep(0.05)
+    
+#     # print(cpx.light)
+#     # print(int(peak))
+ 
+    # Iterate over reach pixel (0-9)
+    # Changes color of pixel up withing light scale. 
+    # for i in range(10):
+    #     if i <= peak:
+    #         change_color(RED, i)
+    #     else:
+    #         change_color(BLACK, i)
+
+#     # cpx.pixels.show()
+#     # # Creates a 0.05 second delay before testing for light again.
+#     # sleep(0.05)
+
+# while True:
+
+    # D13 on when switch is on.
+    # cpx.red_led = cpx.switch
+
+#     if cpx.tapped:
+#         current_color = choice(color_list)
+#         change_color(current_color)
+
+ 
