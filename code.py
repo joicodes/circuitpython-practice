@@ -61,15 +61,23 @@ def blink_red_led(time=0.5):
 
 #🎚 D7 - side swich above the battery connector.
 # 'on' and 'off' are states are True and False.
-# D7 Helper Functions (Use cpx.red_led):
+# D7 Helper Functions (Use cpx.switch):
 
+# Example: 
+# D13 on when switch is on.
+# cpx.red_led = cpx.switch
 
 # Built in accelerometer functionality:
+
 
 #👆 Tap Detection - options: single tap, double tap
 # Tap Helper Functions (Use cpx.tapped)
 
-# Example: cpx.tapped
+# Example: 
+
+#     if cpx.tapped:
+#         current_color = choice(color_list)
+#         change_color(current_color)
 
 
 #🤝 Shake Detection - options: shake_threshold (int)
@@ -79,7 +87,7 @@ def blink_red_led(time=0.5):
 
 # Example: cpx.shake(shake_threshold=20)
 
-#TODO: https://learn.adafruit.com/circuitpython-made-easy-on-circuit-playground-express/light
+
 #🌞 A8 Light Detection - light sensor next to eye
 # Senses the amount of ambient light
 # returns the light level based on that data
@@ -90,6 +98,32 @@ def scale_range(value):
     Allows remapping light value to pixel position."""
     return round(value / 320 * 9)
 
+
+
+# 💨 Acceleration - (accelerometer in center of board)
+# This sensor can provide acceleration values for 
+# the x, y and z axes in addition to taps and shake
+# Acceleration Helper Functions (cpx.acceleration):
+
+# Example:
+# x, y, z = cp.acceleration
+
+
+
+# 🌡Temperature (see little thermometer near A9):
+# Returns the temperature in Celcius
+
+# Example:
+# print("Temperature C:", cp.temperature)
+# print("Temperature F:", cp.temperature * 1.8 + 32)
+
+# Tone - Grey box with + on it, bewlow A, left of switch.
+# This speaker is capable of playing multiple things in cluding tone.
+
+    # if cp.button_a:
+    #     cp.play_tone(262, 1)
+    # if cp.button_b:
+    #     cp.play_tone(294, 1)
 
 
 # Initialize Settings:
@@ -108,11 +142,10 @@ while True:
     if peak > 315:
         change_color(GREEN)
 
+
     cpx.pixels.show()
     sleep(0.05)
     
-#     # print(cpx.light)
-#     # print(int(peak))
  
     # Iterate over reach pixel (0-9)
     # Changes color of pixel up withing light scale. 
@@ -126,13 +159,5 @@ while True:
 #     # # Creates a 0.05 second delay before testing for light again.
 #     # sleep(0.05)
 
-# while True:
-
-    # D13 on when switch is on.
-    # cpx.red_led = cpx.switch
-
-#     if cpx.tapped:
-#         current_color = choice(color_list)
-#         change_color(current_color)
 
  
